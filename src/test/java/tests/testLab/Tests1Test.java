@@ -22,15 +22,14 @@ public class Tests1Test extends BaseTest {
     @BeforeClass
     public void classSetup(){
         driver.get(baseUrl);
-
     }
-
 
     @Test(priority = 1)
     public void firstTest(){
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertEquals(1,2);
         softAssert.assertEquals(2,3);
+        softAssert.assertAll();
     }
 
     @Test(priority = 2, dependsOnMethods = "firstTest")
