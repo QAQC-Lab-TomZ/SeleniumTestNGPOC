@@ -25,6 +25,7 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -102,7 +103,7 @@ public class BaseTest {
 
         //Add print screen to allure
         if (testResult.getStatus() == ITestResult.FAILURE) {
-            String pathToPNG = takeScreenshot(testResult.getName());
+            String pathToPNG = takeScreenshot();
             Path content = Paths.get(pathToPNG);
             try (InputStream is = Files.newInputStream(content)) {
                 Allure.addAttachment("Print screen", is);
@@ -151,9 +152,9 @@ public class BaseTest {
         }
     }
 
-    public String takeScreenshot(String testMethodName) {
+    public String takeScreenshot() {
         String pathToDirectory = "target/screenshots";
-        String pathToFile = pathToDirectory + "/" + testMethodName + "_error.png";
+        String pathToFile = pathToDirectory + "/" + java.time.LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmssSSSS")) + "_error.png";
         File directory = new File(pathToDirectory);
         if (!directory.exists()) {
             directory.mkdir();
