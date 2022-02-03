@@ -35,7 +35,6 @@ public class Tests3Test extends BaseTest {
     //Soft assertion example
     @Test
     public void firstTest() {
-
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertEquals(a, b);
         softAssert.assertEquals(b, c);
