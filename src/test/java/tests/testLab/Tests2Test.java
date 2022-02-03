@@ -7,7 +7,11 @@ import org.testng.asserts.SoftAssert;
 import tests.BaseTest;
 
 /************************************************************************
- Description : Test class example
+ Description : Test class
+ - example of soft and hard assertions
+ - tests executed in a particular order (priority)
+ - tests methods don't use dependency
+
  Created by : Tomasz Zulawnik
 
  Class History
@@ -20,34 +24,43 @@ import tests.BaseTest;
 public class Tests2Test extends BaseTest {
 
     @BeforeClass
-    public void classSetup(){
-
+    public void classSetup() {
         driver.get(baseUrl);
     }
 
+    private final int a = 1;
+    private final int b = 2;
+    private final int c = 3;
+
+    //Soft assertion example
     @Test(priority = 1)
-    public void firstTest(){
+    public void firstTest() {
+
         SoftAssert softAssert = new SoftAssert();
-        softAssert.assertEquals(1,2);
-        softAssert.assertEquals(2,3);
+        softAssert.assertEquals(a, b);
+        softAssert.assertEquals(b, c);
         softAssert.assertAll();
     }
 
+    //Hard assertion example
     @Test(priority = 2)
-    public void secondTest(){
-        Assert.assertEquals(1,2);
-        Assert.assertEquals(2,3);
+    public void secondTest() {
+        Assert.assertEquals(a, b);
+        Assert.assertEquals(b, c);
     }
 
     @Test(priority = 3)
-    public void thirdTest(){
+    public void thirdTest() {
+        //your test code here
     }
 
     @Test(priority = 4)
-    public void fourthTest(){
+    public void fourthTest() {
+        //your test code here
     }
 
     @Test(priority = 5)
-    public void fifthTest(){
+    public void fifthTest() {
+        //your test code here
     }
 }

@@ -1,11 +1,17 @@
 package tests.testLab;
 
+import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 import tests.BaseTest;
 
 /************************************************************************
- Description : Test class example
+ Description : Test class
+ - example of soft and hard assertions
+ - tests executed with unpredictable order
+ - tests methods don't use dependency
+
  Created by : Tomasz Zulawnik
 
  Class History
@@ -18,27 +24,43 @@ import tests.BaseTest;
 public class Tests3Test extends BaseTest {
 
     @BeforeClass
-    public void classSetup(){
+    public void classSetup() {
         driver.get(baseUrl);
     }
 
-    @Test(priority = 1)
-    public void firstTest(){
+    private final int a = 1;
+    private final int b = 2;
+    private final int c = 3;
+
+    //Soft assertion example
+    @Test
+    public void firstTest() {
+
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertEquals(a, b);
+        softAssert.assertEquals(b, c);
+        softAssert.assertAll();
     }
 
-    @Test(priority = 2)
-    public void secondTest(){
+    //Hard assertion example
+    @Test
+    public void secondTest() {
+        Assert.assertEquals(a, b);
+        Assert.assertEquals(b, c);
     }
 
-    @Test(priority = 3)
-    public void thirdTest(){
+    @Test
+    public void thirdTest() {
+        //your test code here
     }
 
-    @Test(priority = 4)
-    public void fourthTest(){
+    @Test
+    public void fourthTest() {
+        //your test code here
     }
 
-    @Test(priority = 5)
-    public void fifthTest(){
+    @Test
+    public void fifthTest() {
+        //your test code here
     }
 }
