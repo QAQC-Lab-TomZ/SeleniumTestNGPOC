@@ -1,6 +1,5 @@
 package tests;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
 import io.qameta.allure.Allure;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -78,13 +77,6 @@ public class BaseTest {
         //headless setup
         if (headless) {
             options.addArguments("--headless", "--no-sandbox", "--disable-dev-shm-usage", "--disable-gpu", "--window-size=1920,1040", "--ignore-certificate-errors");
-        }
-
-        //use chromium driver instead of chrome driver
-        if (environment.equals("chromium")) {
-            WebDriverManager.chromiumdriver().setup();
-        } else {
-            WebDriverManager.chromedriver().setup();
         }
 
         driver = new ChromeDriver(options);
