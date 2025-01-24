@@ -1,6 +1,5 @@
 package tests;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
 import io.qameta.allure.Allure;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -53,6 +52,7 @@ public class BaseTest {
     protected static String adminUsername;
     protected static String adminPassword;
     protected static String userUsername;
+
     protected static String userPassword;
     protected static String communityUserUsername;
     protected static String communityUserPassword;
@@ -61,7 +61,7 @@ public class BaseTest {
     private static String environmentLocation;
 
     @BeforeSuite
-    public void suiteSetup(){
+    public void suiteSetup() {
         environmentLocation = System.getProperty(ENVIRONMENT_LOCATION_PROPERTY_NAME);
         getEnvironmentData();
     }
@@ -78,13 +78,6 @@ public class BaseTest {
         //headless setup
         if (headless) {
             options.addArguments("--headless", "--no-sandbox", "--disable-dev-shm-usage", "--disable-gpu", "--window-size=1920,1040", "--ignore-certificate-errors");
-        }
-
-        //use chromium driver instead of chrome driver
-        if (environment.equals("chromium")) {
-            WebDriverManager.chromiumdriver().setup();
-        } else {
-            WebDriverManager.chromedriver().setup();
         }
 
         driver = new ChromeDriver(options);
